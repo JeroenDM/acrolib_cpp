@@ -1,3 +1,7 @@
+#pragma once
+
+#include <cassert>
+#include <cmath>
 #include <vector>
 
 namespace acro
@@ -34,6 +38,17 @@ inline std::vector<size_t> convertBase(size_t n, const std::vector<size_t>& base
     n /= bases[i];
   }
   return digits;
+}
+
+/** \brief Simple L2-norm for std::vectors. **/
+inline double l2Norm(const std::vector<double>& a, const std::vector<double>& b)
+{
+  assert(a.size() == b.size());
+
+  double n{ 0.0 };
+  for (size_t k{ 0 }; k < a.size(); ++k)
+    n += (a[k] - b[k]) * (a[k] - b[k]);
+  return sqrt(n);
 }
 
 }  // namespace acro

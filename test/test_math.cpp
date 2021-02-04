@@ -6,6 +6,11 @@
 using namespace acro;
 using namespace std;
 
+void ASSERT_EQ(double a, double b, double abs_tol=1e-16)
+{
+  assert(abs(a - b) < abs_tol);
+}
+
 // See example explanation in math.h.
 // clang-format off
 const vector<vector<size_t>> ALLDIGITS ={
@@ -42,9 +47,20 @@ bool testFromDocString()
   return true;
 }
 
+bool testL2Norm()
+{
+  ASSERT_EQ(l2Norm({ -1.0 }, { 1.0 }), 2.0);
+  ASSERT_EQ(l2Norm({ -1.0, 0.0 }, { 1.0, 0.0 }), 2.0);
+  ASSERT_EQ(l2Norm({ 0.0, 0.0 }, { 0.0, 0.0 }), 0.0);
+  ASSERT_EQ(l2Norm({ 0.1, 0.1 }, { 1.1, 1.1 }), sqrt(2));
+
+  return true;
+}
+
 int main()
 {
   assert(testFromDocString());
+  assert(testL2Norm());
 
   return 0;
 }

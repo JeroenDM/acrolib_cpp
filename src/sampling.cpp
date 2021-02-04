@@ -16,7 +16,7 @@ GridSamples<SampleType>::GridSamples(const std::vector<std::vector<double>>& sam
 }
 
 template <typename SampleType>
-SampleType GridSamples<SampleType>::operator[](std::size_t ind)
+SampleType GridSamples<SampleType>::operator[](std::size_t ind) const
 {
   SampleType sample(n_);
   auto s = convertBase(ind, sample_range_sizes_);
@@ -29,5 +29,10 @@ SampleType GridSamples<SampleType>::operator[](std::size_t ind)
 
 template class GridSamples<Eigen::VectorXd>;
 template class GridSamples<std::vector<double>>;
+
+template GridSamples<Eigen::VectorXd> createGridSamples<Eigen::VectorXd>(const std::vector<Limits>& limits,
+                                                                         double resolution);
+template GridSamples<std::vector<double>> createGridSamples<std::vector<double>>(const std::vector<Limits>& limits,
+                                                                                 double resolution);
 
 }  // namespace acro

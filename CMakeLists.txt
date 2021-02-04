@@ -22,6 +22,7 @@ include_directories(
 add_library(acrolib SHARED
     src/sampling.cpp
     src/data_loggers.cpp
+    src/dispersion.cpp
 )
 
 # Testing
@@ -36,3 +37,7 @@ add_test(data_loggers test_data_loggers)
 add_executable(test_math test/test_math.cpp)
 target_link_libraries(test_math  acrolib)
 add_test(math test_math)
+
+add_executable(test_dispersion test/test_dispersion.cpp)
+target_link_libraries(test_dispersion  acrolib)
+add_test(dispersion test_dispersion)

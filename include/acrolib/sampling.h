@@ -36,12 +36,35 @@ class GridSamples
 public:
   GridSamples(const std::vector<std::vector<double>>& sample_ranges);
 
-  SampleType operator[](std::size_t ind);
+  SampleType operator[](std::size_t ind) const;
 
   std::size_t size() const
   {
     return total_sample_count_;
   }
 };
+
+struct Limits
+{
+  double lower, upper;
+};
+
+template <typename SampleType>
+GridSamples<SampleType> createGridSamples(const std::vector<Limits>& limits, double resolution)
+{
+  // calculate the specific sample levels for each dimension
+  std::vector<std::vector<double>> sample_ranges(limits.size());
+  for (size_t k{ 0 }; k < limits.size(); ++k)
+  {
+    double value = limits.at(k).lower;
+    while (value <= limits.at(k).upper)
+    {
+      sample_ranges.at(k).push_back(value);
+      value += resolution;
+    }
+  }
+
+  return GridSamples<SampleType>(sample_ranges);
+}
 
 }  // namespace acro
