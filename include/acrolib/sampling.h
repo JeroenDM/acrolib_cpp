@@ -49,22 +49,14 @@ struct Limits
   double lower, upper;
 };
 
-template <typename SampleType>
-GridSamples<SampleType> createGridSamples(const std::vector<Limits>& limits, double resolution)
-{
-  // calculate the specific sample levels for each dimension
-  std::vector<std::vector<double>> sample_ranges(limits.size());
-  for (size_t k{ 0 }; k < limits.size(); ++k)
-  {
-    double value = limits.at(k).lower;
-    while (value <= limits.at(k).upper)
-    {
-      sample_ranges.at(k).push_back(value);
-      value += resolution;
-    }
-  }
-
-  return GridSamples<SampleType>(sample_ranges);
-}
+/** \brief Given joint limits for every dimension and a desired resolution,
+ * calculate the specific values that need to be sampled along every dimension.
+ * 
+ * For example, given limits {{0, 1}, {0, 2}} with a resolution of 0.5 we get:
+ * { {0.0, 0.5, 1.0} ,  {0.0, 0.5, 1.0, 1.5, 2.0} }
+ * Note that this includes the boundaries. We assume the limits are closed intervals.
+ * 
+ * **/
+std::vector<std::vector<double>> calculateRangesFromLimits(const std::vector<Limits>& limits, double resolution);
 
 }  // namespace acro

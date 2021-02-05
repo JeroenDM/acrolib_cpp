@@ -58,7 +58,8 @@ void testDispersion()
   ASSERT_EQ(calcDispersion(samples, grid), expected_dispersion);
 
   vector<Limits> limits{ { 0, 2 }, { 0, 1 } };
-  GridSamples<vector<double>> gs = createGridSamples<vector<double>>(limits, 0.5);
+  auto sample_ranges = calculateRangesFromLimits(limits, 0.5);
+  auto gs = GridSamples<vector<double>>(sample_ranges);
 
   ASSERT_EQ(calcDispersion(samples, gs), expected_dispersion);
 }
