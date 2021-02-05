@@ -1,4 +1,5 @@
 #include <acrolib/sampling.h>
+#include <acrolib/test_utils.h>
 
 #include <cassert>
 #include <iostream>
@@ -6,13 +7,6 @@
 
 using namespace acro;
 using namespace std;
-
-constexpr double EPS = std::numeric_limits<double>::epsilon();
-
-void ASSERT_EQ(double a, double b, double abs_tol = EPS)
-{
-  assert(abs(a - b) < abs_tol);
-}
 
 void testRangeCalculation()
 {

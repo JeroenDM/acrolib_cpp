@@ -1,23 +1,14 @@
 #include <acrolib/dispersion.h>
+#include <acrolib/test_utils.h>
 
 #include <acrolib/sampling.h>
-#include <acrolib/dispersion.h>
 
 #include <cassert>
 // #include <iostream>
-#include <limits>
 #include <vector>
-#include <numeric>
-
-constexpr double EPS = std::numeric_limits<double>::epsilon();
 
 using namespace std;
 using namespace acro;
-
-void ASSERT_EQ(double a, double b, double abs_tol = EPS)
-{
-  assert(abs(a - b) < abs_tol);
-}
 
 using Sample = vector<double>;
 

@@ -1,15 +1,11 @@
 #include <acrolib/math.h>
+#include <acrolib/test_utils.h>
 
 #include <cassert>
 #include <iostream>
 
 using namespace acro;
 using namespace std;
-
-void ASSERT_EQ(double a, double b, double abs_tol=1e-16)
-{
-  assert(abs(a - b) < abs_tol);
-}
 
 // See example explanation in math.h.
 // clang-format off
