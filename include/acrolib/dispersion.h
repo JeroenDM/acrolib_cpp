@@ -3,10 +3,13 @@
 #include <acrolib/math.h>
 #include <acrolib/sampling.h>
 
+#include <Eigen/Core>
+
 namespace acro
 {
 /** \brief Simple linear time nearest neighbour calculation. **/
-double calcNearestNeighbour(const std::vector<double>& sample, const std::vector<std::vector<double>> other_samples);
+double calcNearestNeighbour(const std::vector<double>& sample, const std::vector<std::vector<double>>& other_samples);
+double calcNearestNeighbour(const Eigen::VectorXd& sample, const std::vector<Eigen::VectorXd>& other_samples);
 
 /** \brief Approximately calculate the dispersion (the largest Euclidian ball that fits in between samples).
  *
@@ -20,6 +23,7 @@ double calcNearestNeighbour(const std::vector<double>& sample, const std::vector
  *
  * */
 double calcDispersion(const std::vector<std::vector<double>>& a, const std::vector<std::vector<double>>& b);
+double calcDispersion(const std::vector<Eigen::VectorXd>& a, const std::vector<Eigen::VectorXd>& b);
 
 /** \brief Dispersion calculation that takes a GridSamples object as reference samples.
  *

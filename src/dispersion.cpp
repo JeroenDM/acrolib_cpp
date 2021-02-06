@@ -6,7 +6,7 @@ namespace acro
 {
 constexpr double INF{ std::numeric_limits<double>::max() };
 
-double calcNearestNeighbour(const std::vector<double>& sample, const std::vector<std::vector<double>> other_samples)
+double calcNearestNeighbour(const std::vector<double>& sample, const std::vector<std::vector<double>>& other_samples)
 {
   double d_min{ INF }, d{ 0.0 };
   for (const auto& xi : other_samples)
@@ -21,8 +21,42 @@ double calcNearestNeighbour(const std::vector<double>& sample, const std::vector
   return d_min;
 }
 
+double calcNearestNeighbour(const Eigen::VectorXd& sample, const std::vector<Eigen::VectorXd>& other_samples)
+{
+  double d_min{ INF }, d{ 0.0 };
+  for (const auto& xi : other_samples)
+  {
+    d = (sample - xi).norm();
+
+    if (d < d_min)
+    {
+      d_min = d;
+    }
+  }
+  return d_min;
+}
+
+
 double calcDispersion(const std::vector<std::vector<double>>& samples,
                       const std::vector<std::vector<double>>& reference_samples)
+{
+  double d_max{ 0.0 };  // keeps track of the current maximum dispersion
+  double d_min{ 0.0 };  // the current nearest neighbour distance
+
+  // Calculate the maximum of all the nearest neighbors of a sample with the reference grid.
+  for (const auto& xi : reference_samples)
+  {
+    d_min = calcNearestNeighbour(xi, samples);
+    if (d_min > d_max)
+    {
+      d_max = d_min;
+    }
+  }
+
+  return d_max;
+}
+
+double calcDispersion(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& reference_samples)
 {
   double d_max{ 0.0 };  // keeps track of the current maximum dispersion
   double d_min{ 0.0 };  // the current nearest neighbour distance
