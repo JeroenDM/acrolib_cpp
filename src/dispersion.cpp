@@ -36,7 +36,6 @@ double calcNearestNeighbour(const Eigen::VectorXd& sample, const std::vector<Eig
   return d_min;
 }
 
-
 double calcDispersion(const std::vector<std::vector<double>>& samples,
                       const std::vector<std::vector<double>>& reference_samples)
 {
@@ -56,7 +55,8 @@ double calcDispersion(const std::vector<std::vector<double>>& samples,
   return d_max;
 }
 
-double calcDispersion(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& reference_samples)
+double calcDispersion(const std::vector<Eigen::VectorXd>& samples,
+                      const std::vector<Eigen::VectorXd>& reference_samples)
 {
   double d_max{ 0.0 };  // keeps track of the current maximum dispersion
   double d_min{ 0.0 };  // the current nearest neighbour distance
@@ -82,6 +82,25 @@ double calcDispersion(const std::vector<std::vector<double>>& samples,
 
   // Calculate the maximum of all the nearest neighbors of a sample with the reference grid.
   // GridSamples does not support range based for loops yet
+  for (size_t ix{ 0 }; ix < reference_samples.size(); ++ix)
+  {
+    d_min = calcNearestNeighbour(reference_samples[ix], samples);
+    if (d_min > d_max)
+    {
+      d_max = d_min;
+    }
+  }
+
+  return d_max;
+}
+
+double calcDispersion(const std::vector<Eigen::VectorXd>& samples,
+                      const GridSamples<Eigen::VectorXd>& reference_samples)
+{
+  double d_max{ 0.0 };  // keeps track of the current maximum dispersion
+  double d_min{ 0.0 };  // the current nearest neighbour distance
+
+  // Calculate the maximum of all the nearest neighbors of a sample with the reference grid.
   for (size_t ix{ 0 }; ix < reference_samples.size(); ++ix)
   {
     d_min = calcNearestNeighbour(reference_samples[ix], samples);

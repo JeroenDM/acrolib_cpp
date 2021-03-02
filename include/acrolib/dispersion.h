@@ -31,6 +31,7 @@ double calcDispersion(const std::vector<Eigen::VectorXd>& a, const std::vector<E
  * This is way more memory efficient.
  * **/
 double calcDispersion(const std::vector<std::vector<double>>& a, const GridSamples<std::vector<double>>& b);
+double calcDispersion(const std::vector<Eigen::VectorXd>& a, const GridSamples<Eigen::VectorXd>& b);
 
 /** \brief Simple but potentially very wrong disperion calculation.
  *

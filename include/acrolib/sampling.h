@@ -51,11 +51,11 @@ struct Limits
 
 /** \brief Given joint limits for every dimension and a desired resolution,
  * calculate the specific values that need to be sampled along every dimension.
- * 
+ *
  * For example, given limits {{0, 1}, {0, 2}} with a resolution of 0.5 we get:
  * { {0.0, 0.5, 1.0} ,  {0.0, 0.5, 1.0, 1.5, 2.0} }
  * Note that this includes the boundaries. We assume the limits are closed intervals.
- * 
+ *
  * **/
 std::vector<std::vector<double>> calculateRangesFromLimits(const std::vector<Limits>& limits, double resolution);
 
@@ -79,5 +79,25 @@ std::vector<T> range(T lower_bound, T upper_bound, int num_samples)
   }
   return r;
 }
+
+// std::vector<double> logrange(double lower_bound, double upper_bound, int num_samples, double base)
+// {
+//   std::vector<double> r;
+//   if (num_samples == 1)
+//   {
+//     r = { lower_bound };
+//   }
+//   else
+//   {
+//     r.resize(num_samples);
+//     double lb = std::log10(base);
+//     std::vector<double> exponents = range(std::log10(lower_bound) / lb, std::log10(upper_bound) / lb, num_samples);
+//     for (int i = 0; i < num_samples; ++i)
+//     {
+//       r[i] = std::pow(base, exponents[i]);
+//     }
+//   }
+//   return r;
+// }
 
 }  // namespace acro
