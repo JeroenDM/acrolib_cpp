@@ -25,6 +25,10 @@ add_library(acrolib SHARED
     src/dispersion.cpp
 )
 
+# Install
+install(FILES include/acrolib DESTINATION include)
+install(TARGETS acrolib DESTINATION bin)
+
 # Testing
 add_executable(test_sampling test/test_sampling.cpp)
 target_link_libraries(test_sampling  acrolib)
