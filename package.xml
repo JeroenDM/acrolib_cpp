@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>acrolib_cpp</name>
+  <version>0.0.1</version>
+  <description>
+    This library contains some things I found myself implementing repeatedly while working at ACRO.
+  </description>
+
+  <maintainer email="jeroen.demaeyer@kuleuven.be">Jeroen De Maeyer</maintainer>
+
+  <license>MIT</license>
+
+  <depend>eigen</depend>
+  <test_depend>gtest</test_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
