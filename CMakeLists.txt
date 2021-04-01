@@ -27,7 +27,7 @@ add_library(acrolib SHARED
 
 # Install
 install(DIRECTORY include/acrolib DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(TARGETS acrolib DESTINATION bin)
+install(TARGETS acrolib DESTINATION lib)
 
 # Testing
 add_executable(test_sampling test/test_sampling.cpp)
