@@ -26,7 +26,7 @@ add_library(acrolib SHARED
 )
 
 # Install
-install(FILES include/acrolib DESTINATION include)
+install(DIRECTORY include/acrolib DESTINATION include FILES_MATCHING PATTERN "*.h")
 install(TARGETS acrolib DESTINATION bin)
 
 # Testing
